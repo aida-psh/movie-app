@@ -9,14 +9,24 @@ const Home = () =>{
         <>
           <HeroSlide/>
           <div className="container" >
-            <div className="section">
-              <div className="section__header" style={{marginTop: "2rem"}}>
+            <div className="section mb-3">
+              <div className="section__header mb-2" style={{marginTop: "2rem"}}>
                 <h2>Trending Movies</h2>
                 <Link to="/movie">
                   <OutlineButton className="small" >view more</OutlineButton>
                 </Link>
               </div>
               <MovieList category={category.movie} type={movieType.popular} />
+            </div>
+
+            <div className="section mb-3">
+              <div className="section__header mb-2">
+                <h2>Top RaTed Movies</h2>
+                <Link to="/movie">
+                  <OutlineButton className="small">view more</OutlineButton>               
+                </Link>
+              </div>
+              <MovieList category={category.movie} type={movieType.top_rated} />
             </div>
           </div>
 

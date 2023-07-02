@@ -10,7 +10,7 @@
         width: 50px;
 
         @include mobile{
-            margin-right: 0;
+            margin-right: 0px;
             width: 30px;
         }
     }

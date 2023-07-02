@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Button from "../button/Button";
 import tmdbApi, { category } from "../../api/tmdbApi";
 import apiConfig from "../../api/apiConfig";
+import MovieCard from "../movie-card/MovieCard";
 const MovieList = props => {
     const [items, setItems] = useState([]);
     useEffect(() => {
@@ -30,22 +31,25 @@ const MovieList = props => {
         getList();
     }, [])
     return (
-        <div className="movie-list">
-            <Swiper
-                spaceBetween={10}
-                slidesPerView={'auto'}
-                grabCursor={true}
-            >
-                {
-                    items.map((item , index) => (
-                        <SwiperSlide key={index}>
-                              <img src={apiConfig.w500Image(item.poster_path)} alt="" />
-                        </SwiperSlide>
-                    ))
-                }
-            </Swiper>
+        <>
+            <div className="movie-list">
+                <Swiper
+                    spaceBetween={10}
+                    slidesPerView={'auto'}
+                    grabCursor={true}
+                >
+                    {
+                        items.map((item, index) => (
+                            <SwiperSlide key={index}>
+                               <MovieCard item={item} category={props.category} ></MovieCard>
+                            </SwiperSlide>
+                        ))
+                    }
+                </Swiper>
 
-        </div>
+            </div>
+
+        </>
     )
 }
 MovieList.prototype = {

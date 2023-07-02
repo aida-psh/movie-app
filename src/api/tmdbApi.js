@@ -50,6 +50,10 @@ const tmdbApi = {
         const url = category[cate]  + '/top_rated';
         return axiosClient.get(url , {params: {}});
     },
+    Upcoming:(cate) => {
+        const url = category[cate]  + '/upcoming';
+        return axiosClient.get(url , {params: {}});
+    },
     Trending:( params) => {
         const url = '/trending'  + '/all' + '/week';
         return axiosClient.get(url , params);

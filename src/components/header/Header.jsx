@@ -1,58 +1,60 @@
-import React, { useEffect, useRef } from "react";
-import './header.scss';
-import { Link , useLocation } from 'react-router-dom';
-import logo from '../../assets/tmovie.png';
+import React, { useRef, useEffect } from 'react';
 
+import { Link, useLocation  } from "react-router-dom";
+
+import './header.scss';
+
+import logo from '../../assets/tmovie (2).png';
 
 const headerNav = [
     {
-        display : 'Home',
-        patch : '/'
+        display: 'Home',
+        path: '/'
     },
     {
-        display : 'Movies',
-        patch : '/movie'
+        display: 'Movies',
+        path: '/movie'
     },
     {
-        display : 'Tv Serioes',
-        patch : '/tv'
+        display: 'TV Series',
+        path: '/tv'
     }
-]
+];
 
 const Header = () => {
-    const {patchname} = useLocation();
+
+    const { pathname } = useLocation();
     const headerRef = useRef(null);
-    const active = headerNav.findIndex(e => e.patch === patchname );
-    
-    useEffect(()=>{
+
+
+    const active = headerNav.findIndex(e => e.path === pathname);
+
+    useEffect(() => {
         const shrinkHeader = () => {
             if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
                 headerRef.current.classList.add('shrink');
-            }else{
+            } else {
                 headerRef.current.classList.remove('shrink');
-                
             }
-           
         }
-         window.addEventListener('scroll' , shrinkHeader);
-        return () =>{
-            window.removeEventListener('scroll' , shrinkHeader);
+        window.addEventListener('scroll', shrinkHeader);
+        return () => {
+            window.removeEventListener('scroll', shrinkHeader);
         };
+    }, []);
 
-    },[]);
-
-    return(
+    return (
         <div ref={headerRef} className="header">
             <div className="header__wrap container">
                 <div className="logo">
-                    <img src={logo} alt=""/>
-                    <Link to="/">baMovie</Link>
+                    <img src={logo} alt="" />
+                    <Link to="/">baMovies</Link>
                 </div>
-                <ul className="header__nav">
+                <ul className="header__nav" onClick={() => window.location.reload()}>
                     {
-                        headerNav.map((e , i) =>(
+                        headerNav.map((e, i) => (
                             <li key={i} className={`${i === active ? 'active' : ''}`}>
-                                <Link to={e.patch}>
+                                <Link to={e.path} >
                                     {e.display}
                                 </Link>
                             </li>
@@ -60,11 +62,8 @@ const Header = () => {
                     }
                 </ul>
             </div>
-            
         </div>
-    )
+    );
 }
 
 export default Header;
-
-
